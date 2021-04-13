@@ -1,12 +1,20 @@
 <?php
 
-// データが入っているかどうか
-// empty isset is_null
+$array_soccers = [
+    "Honda" => [
+        "number" => "22",
+        "hobby" => "soccer",
+    ],
+    "Kagawa" => [
+        "food" => "udon",
+        "hobby" => "soccer",
+    ]
+    ];
 
-$test = "";
-// もし中身が空ならば
-if(empty($test)){
-    echo("helllo");
+foreach($array_soccers as $array_soccer){
+    foreach ($array_soccer as $value) {
+        echo $value;
+    }
 }
 
 ?>
