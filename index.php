@@ -1,15 +1,12 @@
 <?php
 
-echo("123");
+// データが入っているかどうか
+// empty isset is_null
 
-// $から変数定義
-$test = 123;
-echo $test;
-
-// phpは動的型付け言語であるため、今何の型がついているのか分からない時がある
-// var_dumpを使うことによって、型を知ることができる
-var_dump($test)
-
-
+$test = "";
+// もし中身が空ならば
+if(empty($test)){
+    echo("helllo");
+}
 
 ?>
