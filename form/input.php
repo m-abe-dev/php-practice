@@ -1,12 +1,12 @@
 <?php
 
 // 何か変数に入っていれば
-if (!empty($_GET)) {
+if (!empty($_POST)) {
     echo "<pre>";
-    var_dump($_GET["your_name"]);
+    var_dump($_POST);
     echo "</pre>";
 }
-echo $_GET["your_name"];
+
 
 // スーパーグローバル変数 php 9種類
 // 連想配列
@@ -22,7 +22,7 @@ echo $_GET["your_name"];
     <title>Document</title>
 </head>
 <body>
-    <form method="GET" action="input.php">
+    <form method="POST" action="input.php">
     氏名
     <input type="text" name="your_name">
     <br>
