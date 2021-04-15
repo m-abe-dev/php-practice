@@ -1,5 +1,7 @@
 <?php
 
+$pageFlag = 0;
+
 // 何か変数に入っていれば
 if (!empty($_POST["btn_confirm"])) {
     $pageFlag = 1;
@@ -8,6 +10,7 @@ if (!empty($_POST["btn_confirm"])) {
 if (!empty($_POST["btn_submit"])) {
     $pageFlag = 2;
 }
+
 
 ?>
 
@@ -37,7 +40,6 @@ if (!empty($_POST["btn_submit"])) {
     <input type="submit" name="btn_confirm" value="確認する">
 
     </form>
-    
 <?php endif; ?>
 
 <!-- 確認画面 -->
