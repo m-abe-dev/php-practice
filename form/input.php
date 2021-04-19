@@ -2,6 +2,9 @@
 
 //　ー フォームセキュリティ　サニタイズ　ー
 
+// CSRF 偽物のinput.php->悪意のあるページ
+session_start();
+
 // クリックジャッキング
 header("X-FRAME-OPTIONS:DENY");
 
@@ -9,6 +12,7 @@ header("X-FRAME-OPTIONS:DENY");
 function h($str) {
     return htmlspecialchars($str, ENT_QUOTES, "UTF-8");
 }
+
 
 $pageFlag = 0;
 
@@ -38,6 +42,15 @@ if (!empty($_POST["btn_submit"])) {
 <!-- 申込フォーム -->
 
 <?php if ($pageFlag === 0) : ?>
+<!-- 暗号を生成して適当なフォームであるか確認する -->
+<!-- random_bytesで安全な数値を生成する -->
+<?php 
+if (!isset($_SESSION["csrfToken"])) {
+$csrfToken = bin2hex(random_bytes(32)); 
+$_SESSION["csrfToken"] = $csrfToken;
+}
+$token = $_SESSION["csrfToken"];
+?>
 
     <form method="POST" action="input.php">
     氏名
@@ -47,15 +60,18 @@ if (!empty($_POST["btn_submit"])) {
     メールアドレス
     <input type="email" name="email" value="<?php if(!empty($_POST["email"])){echo h($_POST["email"]);}?>">
     <br>
-
     <input type="submit" name="btn_confirm" value="確認する">
+    <!-- $tokenをinputに記述してpageflag1に渡す -->
+    <input type="hidden" name="csrf" value="<?php echo $token; ?>">
 
     </form>
+
 <?php endif; ?>
 
 <!-- 確認画面 -->
 
 <?php if ($pageFlag === 1) : ?>
+<?php if ($_POST["csrf"] === $_SESSION["csrfToken"]) :?>
 
     <form method="POST" action="input.php">
     氏名
@@ -69,15 +85,22 @@ if (!empty($_POST["btn_submit"])) {
     <input type="submit" name="btn_submit" value="送信する">
     <input type="hidden" name="your_name" value="<?php echo h($_POST["your_name"]) ?>">
     <input type="hidden" name="email" value="<?php echo h($_POST["email"]) ?>">
+    <!-- GETもPOSTも1回通信すると持っているデータが消えてしまう。hiddeninputに隠しておき、その情報をDBに登録する -->
+    <input type="hidden" name="csrf" value="<?php echo h($_POST["csrf"]) ?>">
 
     </form>
     
+<?php endif; ?>
 <?php endif; ?>
 
 <!-- 完了画面 -->
 
 <?php if ($pageFlag === 2) : ?>
+<?php if ($_POST["csrf"] === $_SESSION["csrfToken"]) :?>
     送信が完了しました。
+<!-- sessionに一時保存したtokenを削除する -->
+<?php unset($_SESSION["csrfToken"]); ?>
+<?php endif; ?>
 <?php endif; ?>
 
 
