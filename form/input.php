@@ -14,10 +14,16 @@ function h($str) {
 }
 
 
+
+// バリディエーション
+require "validation.php";
+
+
 $pageFlag = 0;
+$errors = validation($_POST);
 
 // 何か変数に入っていれば
-if (!empty($_POST["btn_confirm"])) {
+if (!empty($_POST["btn_confirm"]) && empty($errors)) {
     $pageFlag = 1;
 }
 
@@ -51,6 +57,17 @@ $_SESSION["csrfToken"] = $csrfToken;
 }
 $token = $_SESSION["csrfToken"];
 ?>
+
+<?php if(!empty($errors) && !empty($_POST["btn_confirm"])) : ?>
+<?php echo "<ul>" ; ?>
+<?php 
+  foreach ($errors as $error) {
+      echo "<li>" . $error . "</li>";
+  }
+?>
+<?php echo "</ul>" ; ?>
+
+<?php endif ; ?>
 
     <form method="POST" action="input.php">
     氏名
