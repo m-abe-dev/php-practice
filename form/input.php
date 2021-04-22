@@ -34,6 +34,10 @@ if (!empty($_POST["btn_submit"])) {
 
 ?>
 
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -112,6 +116,9 @@ $token = $_SESSION["csrfToken"];
 
 <?php endif; ?>
 
+
+
+
 <!-- 確認画面 -->
 
 <?php if ($pageFlag === 1) : ?>
@@ -173,6 +180,9 @@ $token = $_SESSION["csrfToken"];
     
 <?php endif; ?>
 <?php endif; ?>
+
+
+
 
 <!-- 完了画面 -->
 
