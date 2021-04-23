@@ -79,10 +79,10 @@ $token = $_SESSION["csrfToken"];
     <input type="text" name="your_name" value="<?php if(!empty($_POST["your_name"])){echo h($_POST["your_name"]);} ?>">
     <br>
     メールアドレス
-    <input type="email" name="email" value="<?php if(!empty($_POST["email"])){echo h($_POST["email"]);}?>">
+    <input type="text" name="email" value="<?php if(!empty($_POST["email"])){echo h($_POST["email"]);}?>">
     <br>
     ホームページ
-    <input type="url" name="url" value="<?php if(!empty($_POST["url"])){echo h($_POST["url"]);}?>">
+    <input type="text" name="url" value="<?php if(!empty($_POST["url"])){echo h($_POST["url"]);}?>">
     <br>
     性別
     <input type="radio" name="gender" value="0"
@@ -92,7 +92,7 @@ $token = $_SESSION["csrfToken"];
     <br>
     年齢
     <select name="age">
-        <option>選択してください</option>
+        <option value="">選択してください</option>
         <option value="1">~19歳</option>
         <option value="2">20歳~29歳</option>
         <option value="3">30歳~39歳</option>
@@ -102,7 +102,7 @@ $token = $_SESSION["csrfToken"];
     </select>
     <br>
     お問い合わせ
-    <textarea name="contact">
+    <textarea name="contact" id="contact" row="3">
         <?php if(!empty($_POST["contact"])){echo h($_POST["contact"]);}?>
     </textarea>
     <br>

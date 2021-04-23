@@ -13,7 +13,7 @@ function validation($request) {
     // メールアドレス
     if (empty($request["email"]) || !filter_var($request["email"], FILTER_VALIDATE_EMAIL)) {
 
-        $errors[] = "error: メールアドレスは必須です。";
+        $errors[] = "error: メールアドレスは必須です。正しい形式で入力してください。";
     }
 
     // URL
