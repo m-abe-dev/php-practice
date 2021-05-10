@@ -188,8 +188,12 @@ $token = $_SESSION["csrfToken"];
 
 <?php if ($pageFlag === 2) : ?>
 <?php if ($_POST["csrf"] === $_SESSION["csrfToken"]) :?>
-<!-- DB接続 -->
-<!-- DB保存 -->
+
+<?php require "../maintenance/insert.php";
+// 値の受け渡し
+insertContact($_POST);
+?>
+
     送信が完了しました。
 <!-- sessionに一時保存したtokenを削除する -->
 <?php unset($_SESSION["csrfToken"]); ?>

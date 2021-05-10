@@ -1,20 +1,32 @@
 <?php
 
 // DB接続 PDO
+function insertContact($request){
 require "db_connection.php";
 
 // 入力　DB保存　prepare, execute(配列(全て文字列))
 
 $params = [
     "id" => null,
-    "your_name" => "Eren123",
-    "email" => "test@test.com",
-    "url" => "http://test.com",
-    "gender" => "1",
-    "age" => "2",
-    "contact" => "testtest",
+    "your_name" => $request["your_name"],
+    "email" => $request["email"],
+    "url" => $request["url"],
+    "gender" => $request["gender"],
+    "age" => $request["age"],
+    "contact" => $request["contact"],
     "created_id" => null
 ];
+
+// $params = [
+//     "id" => null,
+//     "your_name" => "Eren123",
+//     "email" => "test@test.com",
+//     "url" => "http://test.com",
+//     "gender" => "1",
+//     "age" => "2",
+//     "contact" => "testtest",
+//     "created_id" => null
+// ];
 
 $count = 0;
 $columns = "";
@@ -34,3 +46,5 @@ $sql = "insert into contacts (". $columns .")values(". $values .")";
 $stmt = $pdo->prepare($sql);
 // 紐付けと型を指定
 $stmt->execute($params);
+
+}
