@@ -1,13 +1,24 @@
 <?php 
 
-// 抽象クラス //設定するメソッドを強制すること
-abstract class ProductAbstract {
+// インターフェイス　メソッドの強制でしか書けない
+interface ProductInterface {
 
-    public function echoProduct() {
-        echo "親クラスです";
-    }
+    // public function echoProduct() {
+    //     echo "親クラスです";
+    // }
 
-    abstract public function getProduct();
+    public function getProduct();
+
+}
+
+// インターフェイス　メソッドの強制でしか書けない
+interface NewsInterface {
+
+    // public function echoProduct() {
+    //     echo "親クラスです";
+    // }
+
+    public function getNews();
 
 }
 
@@ -29,7 +40,7 @@ class BaseProduct {
 
 
 // 子クラス・派生クラス・サブクラス
-class Product extends ProductAbstract {
+class Product implements ProductInterface, NewsInterface {
 
 
     // アクセス修飾子, private, public, protected(自分と継承したクラス)
@@ -56,6 +67,10 @@ class Product extends ProductAbstract {
         $this->product .= $item;
     }
 
+    public function getNews(){
+        echo "ニュースです";
+    }
+
     public static function getStaticProduct($str) {
         echo $str;
     }
@@ -69,13 +84,16 @@ $instance->getProduct();
 echo "<br>";
 
 // 親クラスのメソッド
-$instance->echoProduct();
-echo "<br>";
+// $instance->echoProduct();
+// echo "<br>";
 
 $instance->addProduct("追加分");
 echo "<br>";
 
 $instance->getProduct();
+echo "<br>";
+
+$instance->getNews();
 echo "<br>";
 
 // 静的 クラス名::
