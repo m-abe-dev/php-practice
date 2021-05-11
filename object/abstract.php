@@ -1,5 +1,6 @@
 <?php 
 
+
 // 親クラス・基底クラス・ベースクラス・スーパークラス
 class BaseProduct {
 
@@ -14,6 +15,7 @@ class BaseProduct {
     }
 
 }
+
 
 // 子クラス・派生クラス・サブクラス
 class Product extends BaseProduct {
